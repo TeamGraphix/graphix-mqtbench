@@ -4,11 +4,21 @@ from __future__ import annotations
 
 from enum import Enum
 
+# # Code to update the enumeration
+
+# from mqt.bench.benchmarks import get_available_benchmark_names
+# lines = []
+# names = get_available_benchmark_names()
+# for name in names:
+#     lines.append(f'{name.upper()} = "{name}"\n')
+# print("".join(lines))
+
 
 class BenchmarkName(str, Enum):  # noqa: UP042 # enum.StrEnum introduced in Python 3.11
     """Enumeration of quantum benchmark algorithms available in ``mqt.bench``.
 
-    This enumeration is generated with :func:`mqt.bench.benchmarks.get_available_benchmark_names`.
+    This enumeration is generated with :func:`mqt.bench.benchmarks.get_available_benchmark_names`
+    and tested in the test suite.
     """
 
     AE = "ae"
@@ -20,6 +30,7 @@ class BenchmarkName(str, Enum):  # noqa: UP042 # enum.StrEnum introduced in Pyth
     DRAPER_QFT_ADDER = "draper_qft_adder"
     FULL_ADDER = "full_adder"
     GHZ = "ghz"
+    GHZ_DYNAMIC = "ghz_dynamic"
     GRAPHSTATE = "graphstate"
     GROVER = "grover"
     HALF_ADDER = "half_adder"
@@ -36,7 +47,9 @@ class BenchmarkName(str, Enum):  # noqa: UP042 # enum.StrEnum introduced in Pyth
     QWALK = "qwalk"
     RANDOMCIRCUIT = "randomcircuit"
     RG_QFT_MULTIPLIER = "rg_qft_multiplier"
+    SEVEN_QUBIT_STEANE_CODE = "seven_qubit_steane_code"
     SHOR = "shor"
+    SHORS_NINE_QUBIT_CODE = "shors_nine_qubit_code"
     VBE_RIPPLE_CARRY_ADDER = "vbe_ripple_carry_adder"
     VQE_REAL_AMP = "vqe_real_amp"
     VQE_SU2 = "vqe_su2"

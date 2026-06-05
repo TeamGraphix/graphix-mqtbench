@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import contextlib
 from functools import cached_property
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, TypedDict, Unpack
 
 from mqt.bench import get_benchmark_indep
 
@@ -14,7 +14,7 @@ from graphix_mqtbench.converter import qiskit_to_graphix_circuit
 if TYPE_CHECKING:
     from graphix.pattern import Pattern
     from graphix.transpiler import Circuit
-    from qiskit import QiskitCircuit
+    from qiskit import QuantumCircuit
 
 
 class MQTBenchmark:
@@ -39,7 +39,8 @@ class MQTBenchmark:
 
     Notes
     -----
-    The raw Qiskit circuit from ``mqt.bench`` may include a terminal measurement segment, which is omitted from circuit as Graphix does not yet support classical registers. The circuit is also transpiled via :func:`qiskit.transpiler` into the gate set supported by Graphix, which may increase the gate count.
+    The raw Qiskit circuit from ``mqt.bench`` may include a terminal measurement segment, which is omitted from circuit as Graphix does not yet support classical registers. The circuit is also transpiled via :func:`qiskit.transpiler` into the gate set supported by Graphix, which may increase the gate count. Benchmarks ``GHZ_DYNAMIC``, ``SEVEN_QUBIT_STEANE_CODE``, and ``SHORS_NINE_QUBIT_CODE`` are not supported
+    because they contain feed-forward primitives that are still unrepresentable on Graphix circuits.
 
     Examples
     --------
@@ -50,10 +51,18 @@ class MQTBenchmark:
     4
     """
 
-    def __init__(self, name: BenchmarkName, nqubits: int, **kwargs) -> None:
+    def __init__(self, name: BenchmarkName, nqubits: int, **kwargs: Unpack[MQTBenchmarkKwargs]) -> None:
         self._name = name
         self._nqubits = nqubits
         self._kwargs = kwargs
+        if name in {
+            BenchmarkName.GHZ_DYNAMIC,
+            BenchmarkName.SEVEN_QUBIT_STEANE_CODE,
+            BenchmarkName.SHORS_NINE_QUBIT_CODE,
+        }:
+            # These benchmarks contain feed-forward that we can't represent on Graphix circuits yet.
+            # Directly transpiling from qiskit to patterns is not supported yet
+            raise BenchmarkError(f"{name.value} benchmark is not available on graphix-mqtbench yet.")
         try:
             self._raw_circuit = get_benchmark_indep(benchmark=name.value, circuit_size=nqubits, **kwargs)
         except Exception as e:
@@ -94,7 +103,7 @@ class MQTBenchmark:
         return self._nqubits
 
     @property
-    def raw_circuit(self) -> QiskitCircuit:
+    def raw_circuit(self) -> QuantumCircuit:
         """Target-independent raw Qiskit circuit for this benchmark.
 
         Prefer ``circuit`` for downstream Graphix work; this property
@@ -102,7 +111,7 @@ class MQTBenchmark:
 
         Returns
         -------
-        QiskitCircuit
+        QuantumCircuit
             Circuit as returned by :func:`mqt.bench.get_benchmark_indep`.
         """
         return self._raw_circuit
@@ -135,7 +144,7 @@ class MQTBenchmark:
         return self.circuit.transpile().pattern
 
 
-def generate_benchmarks(nqubits: int, **kwargs) -> tuple[MQTBenchmark, ...]:
+def generate_benchmarks(nqubits: int, **kwargs: Unpack[MQTBenchmarkKwargs]) -> tuple[MQTBenchmark, ...]:
     """Generate a sequence of all MQT benchmarks with a given number of qubits.
 
     If a given benchmark does not exist for ``nqubits``, it is skipped.
@@ -160,3 +169,11 @@ def generate_benchmarks(nqubits: int, **kwargs) -> tuple[MQTBenchmark, ...]:
 
 class BenchmarkError(Exception):
     """Exception subclass to handle benchmark errors."""
+
+
+class MQTBenchmarkKwargs(TypedDict, total=False):
+    """Keyword arguments for initializing an ``MQTBenchmark``."""
+
+    opt_level: int
+    generate_mirror_circuit: bool
+    random_parameters: bool

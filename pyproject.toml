@@ -1,19 +1,24 @@
 [project]
 name = "graphix-mqtbench"
 version = "0.1.0"
-description = "Add your description here"
+description = "This plugin provides an interface between Graphix and the MQT Bench suite for benchmarking purposes."
 readme = "README.md"
 authors = [
     { name = "matulni", email = "m.uldemolins@gmail.com" }
 ]
 requires-python = ">=3.13"
 dependencies = [
-    "graphix",
+    "graphix>=0.3.6.dev33",
     "graphix-qasm-parser>=0.1.1",
     "mqt-bench>=2.1.0",
-    "pandas>=3.0.1",
-    "pytest-benchmark>=5.2.3",
-    "pytest-timeout>=2.4.0",
+]
+
+[project.optional-dependencies]
+examples = [
+    "pandas>=3.0.3",
+]
+typing = [
+    "qiskit==2.3.1",
 ]
 
 [build-system]
@@ -24,7 +29,6 @@ build-backend = "uv_build"
 dev = [
     "ipykernel>=7.2.0",
     "mypy==1.19.1",
-    "pylatexenc>=2.10",
     "pyright>=1.1.408",
     "pytest>=9.0.2",
     "ruff==0.15.2",
@@ -111,9 +115,7 @@ ban-relative-imports = "all"
 required-imports = ["from __future__ import annotations"]
 
 [tool.pytest]
-addopts = ["--ignore=examples", "--ignore=docs", "--benchmark-autosave"]
-python_classes = ["BenchTest", "Test"]
-python_functions = ["bench_*", "test_*"]
+addopts = ["--ignore=examples", "--ignore=docs"]
 
 [tool.mypy]
 # Keep in sync with pyright
@@ -144,4 +146,4 @@ reportUnknownVariableType = "information"
 extraPaths = ["./stubs"]
 
 [tool.uv.sources]
-graphix = { path = "../../graphix", editable = true }
+graphix = { git = "https://github.com/TeamGraphix/graphix.git", rev = "master" }
