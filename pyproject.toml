@@ -15,7 +15,7 @@ dependencies = [
 
 [project.optional-dependencies]
 examples = [
-    "pandas>=2.3",
+    "pandas>=2.3, <3",
 ]
 typing = [
     "qiskit==2.3.1",
