@@ -11,3 +11,4 @@ wheels/
 
 test.ipynb
 .benchmarks/
+.DS_Store
