@@ -59,6 +59,8 @@ def instruction_to_qiskit_gate(instr: InstructionKind) -> str:
             return "id"
         case InstructionKind.M:
             return "measure"
+        case InstructionKind.J:
+            raise ValueError("Qiskit does not have a native J gate.")
         case _:
             assert_never(instr)
 
@@ -67,7 +69,11 @@ def instruction_to_qiskit_gate(instr: InstructionKind) -> str:
 # ValueError: Providing non-standard gates (rrz) through the ``basis_gates`` argument is not allowed. Use the ``target`` parameter instead. You can build a target instance using ``Target.from_configuration()`` and provide custom gate definitions with the ``custom_name_mapping`` argument.
 
 
-_GRAPHIX_NATIVE_GATES = [instruction_to_qiskit_gate(instr) for instr in InstructionKind if instr != InstructionKind.RZZ]
+_GRAPHIX_NATIVE_GATES = [
+    instruction_to_qiskit_gate(instr)
+    for instr in InstructionKind
+    if instr not in {InstructionKind.RZZ, InstructionKind.J}
+]
 
 
 def qiskit_to_graphix_circuit(qiskit_circuit: qiskit.QuantumCircuit) -> Circuit:

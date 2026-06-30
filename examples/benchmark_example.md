@@ -1,37 +1,4 @@
-# graphix-mqtbench
-
-This plugin provides an interface between [Graphix](https://github.com/TeamGraphix/graphix) and the [MQT Bench](https://mqt.readthedocs.io/projects/bench/en/latest/index.html) suite for benchmarking purposes.
-
-## Installation
-
-This package supports [`uv`](https://docs.astral.sh/uv/):
-
-```bash
-git clone https://github.com/TeamGraphix/graphix-mqtbench.git
-cd graphix-mqtbench
-uv sync
-```
-
-This creates a virtual environment and installs the necessary dependencies from the `pyproject.toml` and `uv` lockfile.
-
-_Note_: This package dependens on the [`graphix-qasm-parser`](https://github.com/TeamGraphix/graphix-qasm-parser) plugin to transpile qiskit circuits into Graphix circuits.
-
-## Basic usage
-
-The packages provides a wrapper around MQT Bench quantum circuits. Given a benchmark name and a qubit count, the class `MQTBenchmark`  exposes a raw Qiskit circuit, and the corresponding Graphix circuit and pattern.
-
-```python
-from graphix_mqtbench import MQTBenchmark, BenchmarkName
-
-bench = MQTBenchmark(name=BenchmarkName.QFT, nqubits=2)
-pattern = bench.pattern
-pattern.to_bloch().draw()
-```
-
-<img src="./bin/pattern.png" />
-
-
-## Benchmarking Graphix
+# MQTBench suite for Graphix simulators
 
 To run this notebook, install the package with extra dependencies:
 
@@ -39,7 +6,7 @@ To run this notebook, install the package with extra dependencies:
 uv sync --extra examples
 ```
 
-### Benchmark characterization
+#### Benchmark characterization
 
 As of version 0.3.5, Graphix supports two optimizations at the pattern level: _space minimization_ and _Pauli removal_.
 
@@ -83,6 +50,23 @@ df.columns = pd.MultiIndex.from_tuples(df.columns)
 df
 ```
 
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr>
@@ -507,7 +491,7 @@ df
 
 
 
-### Minimal backend benchmark
+#### Minimal backend benchmark
 
 
 ```python
@@ -545,6 +529,6 @@ simulation time = {t:.5f} s")
 
 
 
-## Acknowledgements
+```python
 
-The function `graphix_mqtbench.converter.qiskit_to_graphix_circuit` was developped by @ACE07-Sev for the unitaryDESIGN 2025 edition.
+```
