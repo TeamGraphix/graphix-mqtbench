@@ -14,7 +14,7 @@ from enum import Enum
 # print("".join(lines))
 
 
-class BenchmarkName(str, Enum):  # noqa: UP042 # enum.StrEnum introduced in Python 3.11
+class BenchmarkName(str, Enum):  # enum.StrEnum introduced in Python 3.11
     """Enumeration of quantum benchmark algorithms available in ``mqt.bench``.
 
     This enumeration is generated with :func:`mqt.bench.benchmarks.get_available_benchmark_names`
