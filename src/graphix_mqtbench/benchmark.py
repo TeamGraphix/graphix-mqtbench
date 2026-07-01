@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import contextlib
 from functools import cached_property
-from typing import TYPE_CHECKING, TypedDict, Unpack
+from typing import TYPE_CHECKING, TypedDict
 
 from mqt.bench import get_benchmark_indep
 
@@ -15,6 +15,7 @@ if TYPE_CHECKING:
     from graphix.pattern import Pattern
     from graphix.transpiler import Circuit
     from qiskit import QuantumCircuit
+    from typing_extensions import Unpack  # Added in Python 3.11
 
 
 class MQTBenchmark:
