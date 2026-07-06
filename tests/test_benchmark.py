@@ -46,7 +46,9 @@ class TestMQTBenchmark:
     def test_init(self) -> None:
         bench = MQTBenchmark(BenchmarkName.QFT, 3, generate_mirror_circuit=False, random_parameters=True)
         r = repr(bench)
-        assert "BenchmarkName.QFT" in r
+        # Python==3.10 -> 'MQTBenchmark(name=qft, nqubits=3...'
+        # Python>=3.11 -> 'MQTBenchmark(name=BenchmarkName.QFT, nqubits=3...'
+        assert "BenchmarkName.QFT" in r or "qft" in r
         assert "nqubits=3" in r
         assert "generate_mirror_circuit=False" in r
         assert "random_parameters=True" in r
