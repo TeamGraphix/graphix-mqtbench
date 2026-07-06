@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, assert_never
+from typing import TYPE_CHECKING
 
 import qiskit
 from graphix.instruction import InstructionKind
 from graphix_qasm_parser import OpenQASMParser
 from qiskit.qasm3 import dumps as qiskit_qasm3_dumps
+from typing_extensions import assert_never  # intrduced in Python 3.11
 
 if TYPE_CHECKING:
     from graphix import Circuit
