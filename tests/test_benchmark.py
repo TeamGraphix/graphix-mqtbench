@@ -24,7 +24,8 @@ def verify_benchmark(bench: MQTBenchmark, rng: Generator) -> bool:
     qc_clean.remove_final_measurements()
     qiskit_data = Statevector_qiskit(qc_clean).data  # numpy array of complex amplitudes
 
-    qiskit_data_msb = qiskit_data.reshape((2,) * bench.nqubits).transpose(range(bench.nqubits - 1, -1, -1)).reshape(-1)
+    perm = list(reversed(range(bench.nqubits)))
+    qiskit_data_msb = qiskit_data.reshape((2,) * bench.nqubits).transpose(perm).reshape(-1)
     sv_ref = Statevec(qiskit_data_msb)
 
     # Transpiles benchmark to graphix circuit and then to pattern.
