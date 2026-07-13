@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 import pytest
-from graphix import BasicStates, Statevec
+from graphix import BasicStates, Statevector
 from mqt.bench.benchmarks import get_available_benchmark_names
 from qiskit.converters import circuit_to_dag, dag_to_circuit  # type: ignore[attr-defined]
 from qiskit.quantum_info.states.statevector import Statevector as Statevector_qiskit
@@ -25,7 +25,7 @@ def verify_benchmark(bench: MQTBenchmark, rng: Generator) -> bool:
     qiskit_data = Statevector_qiskit(qc_clean).data  # numpy array of complex amplitudes
 
     qiskit_data_msb = qiskit_data.reshape((2,) * bench.nqubits).transpose(range(bench.nqubits - 1, -1, -1)).reshape(-1)
-    sv_ref = Statevec(qiskit_data_msb)
+    sv_ref = Statevector(qiskit_data_msb)
 
     # Transpiles benchmark to graphix circuit and then to pattern.
     pattern = bench.pattern.minimize_space()

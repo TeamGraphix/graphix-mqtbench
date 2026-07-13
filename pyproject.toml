@@ -146,4 +146,4 @@ reportUnknownVariableType = "information"
 extraPaths = ["./stubs"]
 
 [tool.uv.sources]
-graphix = { git = "https://github.com/TeamGraphix/graphix.git", rev = "master" }
+graphix = { git = "https://github.com/matulni/graphix.git", rev = "rename_methods" }
