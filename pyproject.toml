@@ -10,7 +10,7 @@ requires-python = ">=3.10,<3.15"
 dependencies = [
     "graphix>=0.3.6.dev33",
     "graphix-qasm-parser>=0.1.1",
-    "mqt-bench>=2.1.0",
+    "mqt-bench==2.2.2",
 ]
 
 [project.optional-dependencies]
