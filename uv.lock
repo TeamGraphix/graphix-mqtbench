@@ -1259,7 +1259,7 @@ wheels = [
 
 [[package]]
 name = "mqt-bench"
-version = "2.2.3"
+version = "2.2.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "networkx", version = "3.4.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
@@ -1270,9 +1270,9 @@ dependencies = [
     { name = "scikit-learn", version = "1.7.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "scikit-learn", version = "1.9.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/c1/fe/ea5d28ba6bc476bd30530b17ef5aac8e89fd12fb096d4330eaf706e1d13c/mqt_bench-2.2.3.tar.gz", hash = "sha256:b824347c3f9219a5bc891cf1a0c238580d35fc63e629a109ba12db137499ea60", size = 934748, upload-time = "2026-07-07T20:52:22.912Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/33/ca/d1d3a935b795e644cc0f54b30e7ca1599aedae93772982c6821bc83784c2/mqt_bench-2.2.2.tar.gz", hash = "sha256:b6834c85f0245bf0af020eccf2c97a9cb57dce632e6e4997475ff7b54c112fa6", size = 910915, upload-time = "2026-04-20T12:21:56.534Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/50/65/8ee6bee3546c2e63d2c2c8775e6fde187b692a6390fafd365310b0ccea84/mqt_bench-2.2.3-py3-none-any.whl", hash = "sha256:d657cf25ee0d7276c846834fa7869e0746b88fe20f04da183b93a092312330ba", size = 84027, upload-time = "2026-07-07T20:52:21.547Z" },
+    { url = "https://files.pythonhosted.org/packages/67/a2/baf7a7d37baaee2a0d4014958803af514c8bf74038e18c19a340431005dc/mqt_bench-2.2.2-py3-none-any.whl", hash = "sha256:0bc55471fd23631db650482eb6ab42bfaa678bbcbc34676db82be2ab508e057c", size = 81362, upload-time = "2026-04-20T12:21:55.071Z" },
 ]
 
 [[package]]
