@@ -30,7 +30,7 @@ def verify_benchmark(bench: MQTBenchmark, rng: Generator) -> bool:
 
     # Transpiles benchmark to graphix circuit and then to pattern.
     pattern = bench.pattern.minimize_space()
-    sv_test = pattern.simulate_pattern(input_state=BasicStates.ZERO, rng=rng)
+    sv_test = pattern.simulate(input_state=BasicStates.ZERO, rng=rng)
 
     return sv_ref.isclose(sv_test)
 
