@@ -10,7 +10,7 @@ requires-python = ">=3.10,<3.15"
 dependencies = [
     "graphix>=0.3.6.dev33",
     "graphix-qasm-parser>=0.1.1",
-    "mqt-bench==2.2.2",
+    "mqt-bench==2.2.3",
 ]
 
 [project.optional-dependencies]
@@ -22,16 +22,16 @@ typing = [
 ]
 
 [build-system]
-requires = ["uv_build>=0.10.6,<0.11.0"]
+requires = ["uv_build>=0.11.33,<0.12.0"]
 build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
     "ipykernel>=7.2.0",
-    "mypy==1.19.1",
+    "mypy==2.3.0",
     "pyright>=1.1.408",
     "pytest>=9.0.2",
-    "ruff==0.15.2",
+    "ruff==0.16.0",
 ]
 
 [tool.ruff]
