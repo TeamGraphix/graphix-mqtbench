@@ -32,7 +32,7 @@ pattern.to_bloch().draw()
 
 ## Supported benchmarks
 
-The definitions in `_benchmark_names.py` depend on the version of the `mqtbench` package. In particular, `mqtbench` 2.2.3 introduced the new benchmarks `dynamic_qft` and `iqpe` which contain feed-forward primitives that are still unrepresentable on Graphix circuits, so `test_benchmark_names` fails if `mqtbench` 2.2.3 is used with the current code. We currently pin `mqtbench` to version 2.2.2 and provides the script `_generate_benchmark_names.py`, which developers can run to regenerate `_benchmark_names.py`. Running
+The definitions in `_benchmark_names.py` depend on the version of the `mqtbench` package. In particular, `mqtbench` 2.2.3 introduced the new benchmarks `dynamic_qft` and `iqpe` which contain feed-forward primitives that are still unrepresentable on Graphix circuits, so `test_benchmark_names` fails if `mqtbench` 2.2.3 is used with the current code. We currently pin `mqtbench` to version 2.2.2 and provide the script `_generate_benchmark_names.py`, which developers can run to regenerate `_benchmark_names.py`. Running
 
 ```bash
 uv run python _generate_benchmark_names.py
