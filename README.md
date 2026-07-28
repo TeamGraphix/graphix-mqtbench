@@ -14,7 +14,7 @@ uv sync
 
 This creates a virtual environment and installs the necessary dependencies from the `pyproject.toml` and `uv` lockfile.
 
-_Note_: This package dependens on the [`graphix-qasm-parser`](https://github.com/TeamGraphix/graphix-qasm-parser) plugin to transpile qiskit circuits into Graphix circuits.
+_Note_: This package depends on the [`graphix-qasm-parser`](https://github.com/TeamGraphix/graphix-qasm-parser) plugin to transpile qiskit circuits into Graphix circuits.
 
 ## Basic usage
 
@@ -29,6 +29,17 @@ pattern.to_bloch().draw()
 ```
 
 <img src="./bin/pattern.png" />
+
+## Supported benchmarks
+
+The definitions in `_benchmark_names.py` depend on the version of the `mqtbench` package. In particular, `mqtbench` 2.2.3 introduced the new benchmarks `dynamic_qft` and `iqpe` which contain feed-forward primitives that are still unrepresentable on Graphix circuits, so `test_benchmark_names` fails if `mqtbench` 2.2.3 is used with the current code. We currently pin `mqtbench` to version 2.2.2 and provides the script `_generate_benchmark_names.py`, which developers can run to regenerate `_benchmark_names.py`. Running
+
+```bash
+uv run python _generate_benchmark_names.py
+```
+
+regenerates `_benchmark_names.py`.
+
 
 
 ## Benchmarking Graphix
@@ -542,8 +553,6 @@ simulation time = {t:.5f} s")
     max_space = 15
     n_commands = 2982
     simulation time = 0.65946 s
-
-
 
 ## Acknowledgements
 
