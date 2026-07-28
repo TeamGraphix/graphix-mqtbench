@@ -18,7 +18,7 @@ _Note_: This package depends on the [`graphix-qasm-parser`](https://github.com/T
 
 ## Basic usage
 
-The packages provides a wrapper around MQT Bench quantum circuits. Given a benchmark name and a qubit count, the class `MQTBenchmark`  exposes a raw Qiskit circuit, and the corresponding Graphix circuit and pattern.
+The package provides a wrapper around MQT Bench quantum circuits. Given a benchmark name and a qubit count, the class `MQTBenchmark`  exposes a raw Qiskit circuit, and the corresponding Graphix circuit and pattern.
 
 ```python
 from graphix_mqtbench import MQTBenchmark, BenchmarkName
