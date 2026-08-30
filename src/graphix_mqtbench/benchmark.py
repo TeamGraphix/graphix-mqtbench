@@ -7,6 +7,7 @@ from functools import cached_property
 from typing import TYPE_CHECKING, TypedDict
 
 from mqt.bench import get_benchmark_indep
+from qiskit.converters import circuit_to_dag, dag_to_circuit  # type: ignore[attr-defined]
 
 from graphix_mqtbench._benchmark_names import BenchmarkName
 from graphix_mqtbench.converter import qiskit_to_graphix_circuit
@@ -118,8 +119,23 @@ class MQTBenchmark:
         return self._raw_circuit
 
     @cached_property
+    def qiskit_circuit(self) -> QuantumCircuit:
+        """The Qiskit circuit prepared for benchmarking.
+
+        Some benchmarks are given with measurements at the end.
+        We remove them to obtain a statevector.
+        """
+        qc_qiskit = self.raw_circuit
+
+        # Clear the layout before removing measurements to avoid qiskit warnings
+        qc_clean = dag_to_circuit(circuit_to_dag(qc_qiskit))  # type: ignore[no-untyped-call]
+
+        qc_clean.remove_final_measurements()
+        return qc_clean
+
+    @cached_property
     def circuit(self) -> Circuit:
-        """The benchmark circuit converted to a Graphix :class:`graphix.transpiler.Circuit.
+        """The benchmark circuit converted to a Graphix :class:`graphix.transpiler.Circuit`.
 
         Computed once and cached on first access.
 
@@ -127,8 +143,9 @@ class MQTBenchmark:
         -------
         Circuit
             Graphix circuit for the benchmark.
+
         """
-        return qiskit_to_graphix_circuit(self._raw_circuit)
+        return qiskit_to_graphix_circuit(self.qiskit_circuit)
 
     @cached_property
     def pattern(self) -> Pattern:
