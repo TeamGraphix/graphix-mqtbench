@@ -637,8 +637,8 @@ wheels = [
 
 [[package]]
 name = "graphix"
-version = "0.3.6.dev55+gb2b4734c5"
-source = { git = "https://github.com/TeamGraphix/graphix.git?rev=master#b2b4734c53edcf6f50451bb66466ecec59f2ea19" }
+version = "0.5.dev19+gce26726f0"
+source = { git = "https://github.com/TeamGraphix/graphix.git?rev=refs%2Fpull%2F587%2Fhead#ce26726f03c08c23a6c6d059edcc1adc7b89f1eb" }
 dependencies = [
     { name = "matplotlib", version = "3.10.9", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "matplotlib", version = "3.11.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
@@ -685,7 +685,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "graphix", git = "https://github.com/TeamGraphix/graphix.git?rev=master" },
+    { name = "graphix", git = "https://github.com/TeamGraphix/graphix.git?rev=refs%2Fpull%2F587%2Fhead" },
     { name = "graphix-qasm-parser", specifier = ">=0.1.1" },
     { name = "mqt-bench", specifier = "==2.2.2" },
     { name = "pandas", marker = "extra == 'examples'", specifier = ">=2.3,<3" },
