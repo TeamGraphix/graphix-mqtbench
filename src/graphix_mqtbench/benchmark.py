@@ -128,7 +128,7 @@ class MQTBenchmark:
         qc_qiskit = self.raw_circuit
 
         # Clear the layout before removing measurements to avoid qiskit warnings
-        qc_clean = dag_to_circuit(circuit_to_dag(qc_qiskit))  # type: ignore[no-untyped-call]
+        qc_clean: QuantumCircuit = dag_to_circuit(circuit_to_dag(qc_qiskit))  # type: ignore[no-untyped-call]
 
         qc_clean.remove_final_measurements()
         return qc_clean

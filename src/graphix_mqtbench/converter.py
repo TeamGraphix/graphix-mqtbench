@@ -62,6 +62,8 @@ def instruction_to_qiskit_gate(instr: InstructionKind) -> str:
             return "measure"
         case InstructionKind.J:
             raise ValueError("Qiskit does not have a native J gate.")
+        case InstructionKind.CONDINSTR:
+            raise ValueError("Conditional instructions are not part of the gate set.")
         case _:
             assert_never(instr)
 
