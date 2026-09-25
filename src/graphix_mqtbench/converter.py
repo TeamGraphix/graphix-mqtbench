@@ -41,15 +41,29 @@ def instruction_to_qiskit_gate(instr: InstructionKind) -> str:
         case (
             InstructionKind.CCX
             | InstructionKind.SWAP
+            | InstructionKind.CSWAP
+            | InstructionKind.CY
             | InstructionKind.CZ
             | InstructionKind.H
             | InstructionKind.S
+            | InstructionKind.SDG
+            | InstructionKind.T
+            | InstructionKind.TDG
+            | InstructionKind.SX
+            | InstructionKind.SXDG
             | InstructionKind.X
             | InstructionKind.Y
             | InstructionKind.Z
+            | InstructionKind.P
+            | InstructionKind.U
             | InstructionKind.RX
             | InstructionKind.RY
             | InstructionKind.RZ
+            | InstructionKind.CP
+            | InstructionKind.CU
+            | InstructionKind.CRX
+            | InstructionKind.CRY
+            | InstructionKind.CRZ
         ):
             return instr.name.lower()
         case InstructionKind.RZZ:
@@ -60,8 +74,12 @@ def instruction_to_qiskit_gate(instr: InstructionKind) -> str:
             return "id"
         case InstructionKind.M:
             return "measure"
+        case InstructionKind.GPHASE:
+            return "global_phase"
         case InstructionKind.J:
             raise ValueError("Qiskit does not have a native J gate.")
+        case InstructionKind.CJ:
+            raise ValueError("Qiskit does not have a native CJ gate.")
         case _:
             assert_never(instr)
 
@@ -73,7 +91,7 @@ def instruction_to_qiskit_gate(instr: InstructionKind) -> str:
 _GRAPHIX_NATIVE_GATES = [
     instruction_to_qiskit_gate(instr)
     for instr in InstructionKind
-    if instr not in {InstructionKind.RZZ, InstructionKind.J}
+    if instr not in {InstructionKind.RZZ, InstructionKind.J, InstructionKind.CJ}
 ]
 
 

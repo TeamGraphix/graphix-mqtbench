@@ -7,6 +7,7 @@ from functools import cached_property
 from typing import TYPE_CHECKING, TypedDict
 
 from mqt.bench import get_benchmark_indep
+from qiskit.converters import circuit_to_dag, dag_to_circuit  # type: ignore[attr-defined]
 
 from graphix_mqtbench._benchmark_names import BenchmarkName
 from graphix_mqtbench.converter import qiskit_to_graphix_circuit
@@ -52,6 +53,9 @@ class MQTBenchmark:
     4
     """
 
+    _raw_circuit: QuantumCircuit
+    _qiskit_circuit: QuantumCircuit
+
     def __init__(self, name: BenchmarkName, nqubits: int, **kwargs: Unpack[MQTBenchmarkKwargs]) -> None:
         self._name = name
         self._nqubits = nqubits
@@ -66,6 +70,9 @@ class MQTBenchmark:
             raise BenchmarkError(f"{name.value} benchmark is not available on graphix-mqtbench yet.")
         try:
             self._raw_circuit = get_benchmark_indep(benchmark=name.value, circuit_size=nqubits, **kwargs)
+            # Clear the layout before removing measurements to avoid qiskit warnings
+            self._qiskit_circuit = dag_to_circuit(circuit_to_dag(self._raw_circuit))  # type: ignore[no-untyped-call]
+            self._qiskit_circuit.remove_final_measurements()
         except Exception as e:
             # If a benchmark does not exist for a given number of qubits, it may raise several
             # different types of exceptions so we use a catch-all `Exception`.
@@ -117,6 +124,15 @@ class MQTBenchmark:
         """
         return self._raw_circuit
 
+    @property
+    def qiskit_circuit(self) -> QuantumCircuit:
+        """The Qiskit circuit prepared for benchmarking.
+
+        Some benchmarks are given with measurements at the end.
+        We remove them to obtain a statevector.
+        """
+        return self._qiskit_circuit
+
     @cached_property
     def circuit(self) -> Circuit:
         """The benchmark circuit converted to a Graphix :class:`graphix.transpiler.Circuit.
@@ -128,7 +144,7 @@ class MQTBenchmark:
         Circuit
             Graphix circuit for the benchmark.
         """
-        return qiskit_to_graphix_circuit(self._raw_circuit)
+        return qiskit_to_graphix_circuit(self.qiskit_circuit)
 
     @cached_property
     def pattern(self) -> Pattern:
