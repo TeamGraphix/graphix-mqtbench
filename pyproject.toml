@@ -146,5 +146,7 @@ reportUnknownVariableType = "information"
 extraPaths = ["./stubs"]
 
 [tool.uv.sources]
-graphix = { git = "https://github.com/TeamGraphix/graphix.git" }
-graphix-qasm-parser = { git = "https://github.com/TeamGraphix/graphix-qasm-parser.git" }
+# TeamGraphix/graphix#608: Ensure consistency for instruction qubits
+graphix = { git = "https://github.com/TeamGraphix/graphix.git", branch = "refs/pull/608/head" }
+# TeamGraphix/graphix-qasm-parser#19: fix for TeamGraphix/graphix#608
+graphix-qasm-parser = { git = "https://github.com/TeamGraphix/graphix-qasm-parser.git", branch = "refs/pull/19/head" }
