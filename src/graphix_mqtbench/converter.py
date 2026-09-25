@@ -64,7 +64,6 @@ def instruction_to_qiskit_gate(instr: InstructionKind) -> str:
             | InstructionKind.CRX
             | InstructionKind.CRY
             | InstructionKind.CRZ
-            | InstructionKind.GPHASE
         ):
             return instr.name.lower()
         case InstructionKind.RZZ:
@@ -75,6 +74,8 @@ def instruction_to_qiskit_gate(instr: InstructionKind) -> str:
             return "id"
         case InstructionKind.M:
             return "measure"
+        case InstructionKind.GPHASE:
+            return "global_phase"
         case InstructionKind.J:
             raise ValueError("Qiskit does not have a native J gate.")
         case InstructionKind.CJ:
@@ -90,7 +91,7 @@ def instruction_to_qiskit_gate(instr: InstructionKind) -> str:
 _GRAPHIX_NATIVE_GATES = [
     instruction_to_qiskit_gate(instr)
     for instr in InstructionKind
-    if instr not in {InstructionKind.RZZ, InstructionKind.J, InstructionKind.CJ, InstructionKind.GPHASE}
+    if instr not in {InstructionKind.RZZ, InstructionKind.J, InstructionKind.CJ}
 ]
 
 
