@@ -2,13 +2,15 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import (
+    TYPE_CHECKING,
+    assert_never,  # intrduced in Python 3.11
+)
 
 import qiskit
 from graphix.instruction import InstructionKind
 from graphix_qasm_parser import OpenQASMParser
 from qiskit.qasm3 import dumps as qiskit_qasm3_dumps
-from typing_extensions import assert_never  # intrduced in Python 3.11
 
 if TYPE_CHECKING:
     from graphix import Circuit
@@ -79,6 +81,8 @@ def instruction_to_qiskit_gate(instr: InstructionKind) -> str:
             raise ValueError("Qiskit does not have a native J gate.")
         case InstructionKind.CJ:
             raise ValueError("Qiskit does not have a native CJ gate.")
+        case InstructionKind.CONDINSTR:
+            raise ValueError("Conditional instructions are not part of the gate set.")
         case _:
             assert_never(instr)
 
@@ -90,7 +94,14 @@ def instruction_to_qiskit_gate(instr: InstructionKind) -> str:
 _GRAPHIX_NATIVE_GATES = [
     instruction_to_qiskit_gate(instr)
     for instr in InstructionKind
-    if instr not in {InstructionKind.RZZ, InstructionKind.J, InstructionKind.CJ, InstructionKind.GPHASE}
+    if instr
+    not in {
+        InstructionKind.RZZ,
+        InstructionKind.J,
+        InstructionKind.CJ,
+        InstructionKind.GPHASE,
+        InstructionKind.CONDINSTR,
+    }
 ]
 
 

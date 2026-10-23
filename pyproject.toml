@@ -6,9 +6,9 @@ readme = "README.md"
 authors = [
     { name = "matulni", email = "m.uldemolins@gmail.com" }
 ]
-requires-python = ">=3.10,<3.15"
+requires-python = ">=3.11,<3.16"
 dependencies = [
-    "graphix>=0.3.6.dev33",
+    "graphix>=0.4",
     "graphix-qasm-parser>=0.1.1",
     "mqt-bench==2.2.2",
 ]
@@ -147,6 +147,6 @@ extraPaths = ["./stubs"]
 
 [tool.uv.sources]
 # TeamGraphix/graphix#608: Ensure consistency for instruction qubits
-graphix = { git = "https://github.com/TeamGraphix/graphix.git", branch = "refs/pull/608/head" }
+graphix = { git = "https://github.com/TeamGraphix/graphix.git", rev = "refs/pull/608/head" }
 # TeamGraphix/graphix-qasm-parser#19: fix for TeamGraphix/graphix#608
-graphix-qasm-parser = { git = "https://github.com/TeamGraphix/graphix-qasm-parser.git", branch = "refs/pull/19/head" }
+graphix-qasm-parser = { git = "https://github.com/TeamGraphix/graphix-qasm-parser.git", rev = "refs/pull/19/head" }
