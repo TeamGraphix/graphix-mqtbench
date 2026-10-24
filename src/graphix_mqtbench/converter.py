@@ -66,7 +66,6 @@ def instruction_to_qiskit_gate(instr: InstructionKind) -> str:
             | InstructionKind.CRX
             | InstructionKind.CRY
             | InstructionKind.CRZ
-            | InstructionKind.CH
         ):
             return instr.name.lower()
         case InstructionKind.RZZ:
