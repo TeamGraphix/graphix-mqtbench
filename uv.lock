@@ -510,8 +510,8 @@ wheels = [
 
 [[package]]
 name = "graphix"
-version = "0.4.2.dev28+gbf8e7b6cb"
-source = { git = "https://github.com/TeamGraphix/graphix.git?rev=refs%2Fpull%2F608%2Fhead#bf8e7b6cbecf00afc3497aaaf49fe74cff61edd6" }
+version = "0.4.2.dev7+gc84114c28"
+source = { git = "https://github.com/TeamGraphix/graphix.git?rev=refs%2Fpull%2F624%2Fhead#c84114c281fb73bf94f34825a145bd9b0135d4c7" }
 dependencies = [
     { name = "matplotlib" },
     { name = "networkx" },
@@ -554,8 +554,8 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "graphix", git = "https://github.com/TeamGraphix/graphix.git?rev=refs%2Fpull%2F608%2Fhead" },
-    { name = "graphix-qasm-parser", git = "https://github.com/TeamGraphix/graphix-qasm-parser.git?rev=refs%2Fpull%2F19%2Fhead" },
+    { name = "graphix", git = "https://github.com/TeamGraphix/graphix.git?rev=refs%2Fpull%2F624%2Fhead" },
+    { name = "graphix-qasm-parser", git = "https://github.com/TeamGraphix/graphix-qasm-parser.git?rev=refs%2Fpull%2F20%2Fhead" },
     { name = "mqt-bench", specifier = "==2.2.2" },
     { name = "pandas", marker = "extra == 'examples'", specifier = ">=2.3,<3" },
     { name = "qiskit", marker = "extra == 'typing'", specifier = "==2.3.1" },
@@ -573,8 +573,8 @@ dev = [
 
 [[package]]
 name = "graphix-qasm-parser"
-version = "0.1.2.dev8+g68489f5cc"
-source = { git = "https://github.com/TeamGraphix/graphix-qasm-parser.git?rev=refs%2Fpull%2F19%2Fhead#68489f5cc478ff60394841e0592c27fff7efe04a" }
+version = "0.1.2.dev7+gd29846285"
+source = { git = "https://github.com/TeamGraphix/graphix-qasm-parser.git?rev=refs%2Fpull%2F20%2Fhead#d298462853e64cf627b2308824705fda5880cc05" }
 dependencies = [
     { name = "graphix" },
     { name = "openqasm-parser" },
