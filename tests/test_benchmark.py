@@ -23,7 +23,6 @@ def verify_benchmark(bench: MQTBenchmark, rng: Generator) -> bool:
     sv_ref = Statevector(qiskit_data_msb)
 
     # Transpiles benchmark to graphix circuit and then to pattern.
-    pattern = bench.pattern.minimize_space()
     sv_test = pattern.simulate(input_state=BasicStates.ZERO, rng=rng)
 
     return sv_ref.isclose(sv_test)
