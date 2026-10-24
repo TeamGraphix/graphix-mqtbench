@@ -146,5 +146,5 @@ reportUnknownVariableType = "information"
 extraPaths = ["./stubs"]
 
 [tool.uv.sources]
-graphix = { git = "https://github.com/TeamGraphix/graphix.git" }
-graphix-qasm-parser = { git = "https://github.com/TeamGraphix/graphix-qasm-parser.git" }
+graphix = { git = "https://github.com/TeamGraphix/graphix.git", rev="refs/pull/624/head" }
+graphix-qasm-parser = { git = "https://github.com/TeamGraphix/graphix-qasm-parser.git", rev="refs/pull/20/head" }
