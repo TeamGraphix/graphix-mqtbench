@@ -80,6 +80,8 @@ def instruction_to_qiskit_gate(instr: InstructionKind) -> str:
             raise ValueError("Qiskit does not have a native J gate.")
         case InstructionKind.CJ:
             raise ValueError("Qiskit does not have a native CJ gate.")
+        case InstructionKind.CONDINSTR:
+            raise ValueError("Conditional instructions are not part of the gate set.")
         case _:
             assert_never(instr)
 
@@ -91,7 +93,7 @@ def instruction_to_qiskit_gate(instr: InstructionKind) -> str:
 _GRAPHIX_NATIVE_GATES = [
     instruction_to_qiskit_gate(instr)
     for instr in InstructionKind
-    if instr not in {InstructionKind.RZZ, InstructionKind.J, InstructionKind.CJ}
+    if instr not in {InstructionKind.RZZ, InstructionKind.J, InstructionKind.CJ, InstructionKind.CONDINSTR}
 ]
 
 

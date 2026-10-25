@@ -8,7 +8,7 @@ authors = [
 ]
 requires-python = ">=3.11,<3.16"
 dependencies = [
-    "graphix>=0.3.6.dev33",
+    "graphix>=0.4",
     "graphix-qasm-parser>=0.1.1",
     "mqt-bench==2.2.2",
 ]
