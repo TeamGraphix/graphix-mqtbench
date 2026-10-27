@@ -2,10 +2,7 @@
 
 from __future__ import annotations
 
-from typing import (
-    TYPE_CHECKING,
-    assert_never,  # intrduced in Python 3.11
-)
+from typing import TYPE_CHECKING, assert_never
 
 import qiskit
 from graphix.instruction import InstructionKind
