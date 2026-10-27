@@ -4,10 +4,10 @@
 
 from __future__ import annotations
 
-from enum import Enum
+from enum import StrEnum
 
 
-class BenchmarkName(str, Enum):  # enum.StrEnum introduced in Python 3.11
+class BenchmarkName(StrEnum):
     """Enumeration of quantum benchmark algorithms available in ``mqt.bench``.
 
     This enumeration is generated with :func:`mqt.bench.benchmarks.get_available_benchmark_names`

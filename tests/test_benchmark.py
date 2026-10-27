@@ -5,7 +5,6 @@ from typing import TYPE_CHECKING
 import pytest
 from graphix import BasicStates, Statevector
 from mqt.bench.benchmarks import get_available_benchmark_names
-from qiskit.converters import circuit_to_dag, dag_to_circuit  # type: ignore[attr-defined]
 from qiskit.quantum_info.states.statevector import Statevector as Statevector_qiskit
 
 from graphix_mqtbench import BenchmarkName, MQTBenchmark, generate_benchmarks
@@ -15,22 +14,16 @@ if TYPE_CHECKING:
 
 
 def verify_benchmark(bench: MQTBenchmark, rng: Generator) -> bool:
-    qc_qiskit = bench.raw_circuit
+    qc_qiskit = bench.qiskit_circuit
 
-    # Some benchmarks are given with measurements at the end.
-    # We remove them to obtain a statevector.
-    # Clear the layout before removing measurements to avoid qiskit warnings.
-    qc_clean = dag_to_circuit(circuit_to_dag(qc_qiskit))  # type: ignore[no-untyped-call]
-    qc_clean.remove_final_measurements()
-    qiskit_data = Statevector_qiskit(qc_clean).data  # numpy array of complex amplitudes
+    qiskit_data = Statevector_qiskit(qc_qiskit).data  # numpy array of complex amplitudes
 
     perm = list(reversed(range(bench.nqubits)))
     qiskit_data_msb = qiskit_data.reshape((2,) * bench.nqubits).transpose(perm).reshape(-1)
     sv_ref = Statevector(qiskit_data_msb)
 
     # Transpiles benchmark to graphix circuit and then to pattern.
-    pattern = bench.pattern.minimize_space()
-    sv_test = pattern.simulate(input_state=BasicStates.ZERO, rng=rng)
+    sv_test = bench.pattern.simulate(input_state=BasicStates.ZERO, rng=rng)
 
     return sv_ref.isclose(sv_test)
 

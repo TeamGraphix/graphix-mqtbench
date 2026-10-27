@@ -135,7 +135,7 @@ class MQTBenchmark:
 
     @cached_property
     def circuit(self) -> Circuit:
-        """The benchmark circuit converted to a Graphix :class:`graphix.transpiler.Circuit.
+        """The benchmark circuit converted to a Graphix :class:`graphix.transpiler.Circuit`.
 
         Computed once and cached on first access.
 
@@ -143,6 +143,7 @@ class MQTBenchmark:
         -------
         Circuit
             Graphix circuit for the benchmark.
+
         """
         return qiskit_to_graphix_circuit(self.qiskit_circuit)
 
