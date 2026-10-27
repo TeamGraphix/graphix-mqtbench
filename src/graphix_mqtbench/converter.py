@@ -63,6 +63,7 @@ def instruction_to_qiskit_gate(instr: InstructionKind) -> str:
             | InstructionKind.CRX
             | InstructionKind.CRY
             | InstructionKind.CRZ
+            | InstructionKind.CH
         ):
             return instr.name.lower()
         case InstructionKind.RZZ:
@@ -92,14 +93,7 @@ def instruction_to_qiskit_gate(instr: InstructionKind) -> str:
 _GRAPHIX_NATIVE_GATES = [
     instruction_to_qiskit_gate(instr)
     for instr in InstructionKind
-    if instr
-    not in {
-        InstructionKind.RZZ,
-        InstructionKind.J,
-        InstructionKind.CJ,
-        InstructionKind.GPHASE,
-        InstructionKind.CONDINSTR,
-    }
+    if instr not in {InstructionKind.RZZ, InstructionKind.J, InstructionKind.CJ, InstructionKind.CONDINSTR}
 ]
 
 
